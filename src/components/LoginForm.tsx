@@ -6,7 +6,7 @@ import { CreateUserInput } from '../schema/user.schema'
 import { trpc } from '../utils/trpc'
 
 function VerifyToken({hash}:{hash:string}){
-  const {data, isLoading} = trpc.useQuery(['usersverify-otp', {hash}])
+  const {data, isLoading} = trpc.useQuery(['users.verify-otp', {hash}])
   const router = useRouter()
   if(isLoading){
     return <>Verifying...</>
@@ -20,7 +20,7 @@ function LoginForm() {
   const router = useRouter()
   const {handleSubmit, register} = useForm<CreateUserInput>()
   const [success, setSuccess] = useState(false)
-  const {mutate, error} = trpc.useMutation(['usersrequest-otp'], {
+  const {mutate, error} = trpc.useMutation(['users.request-otp'], {
       onSuccess: (success) => {
         setSuccess(true)
       },
